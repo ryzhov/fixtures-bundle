@@ -33,8 +33,6 @@ public function registerBundles()
 Usage
 =====
 
-Add the `asterisk` section in your configuration file:
-
 ```php
 
 ```
