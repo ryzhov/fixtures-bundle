@@ -2,24 +2,25 @@
 
 namespace Ryzhov\Bundle\FixturesBundle\DataFixtures;
 
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Ryzhov\Bundle\FixturesBundle\Service\FixturesSource;
 
-abstract class LoadData extends AbstractFixture implements OrderedFixtureInterface
+abstract class LoadData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     /**
-     * @var FixturesSource
+     * @var ContainerInterface
      */
-    protected $fixturesSource;
+    protected $container;
     
     /**
-     * @param FixturesSource $fixturesSource
+     * @param ContainerInterface $container
      * @return self
      */
-    public function __construct(FixturesSource $fixturesSource)
+    public function setContainer(ContainerInterface $container = null)
     {
-        $this->fixturesSource = $fixturesSource;
+        $this->container = $container;
         return $this;
     }
 }
