@@ -1,0 +1,10 @@
+parameters:
+
+services:
+
+    fixtures.source:
+        class: Ryzhov\Bundle\FixturesBundle\Service\FixturesSource
+        arguments: ["@kernel","@fixtures.csv_transformer"]
+    
+    fixtures.csv_transformer:
+        class: Ryzhov\Bundle\FixturesBundle\Service\CsvTransformer

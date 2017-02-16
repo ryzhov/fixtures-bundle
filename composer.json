@@ -1,0 +1,26 @@
+{
+    "name": "ryzhov/fixtures-bundle",
+    "type": "symfony-bundle",
+    "description": "FixturesBundle for symfony framework",
+    "keywords": ["fixture", "symfony", "doctrine"],
+    "homepage": "https://github.com/ryzhov/fixtures-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aleksandr N. Ryzhov",
+            "email": "a.n.ryzhov@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "keboola/csv": "^1.1"
+    },
+    "autoload": {
+        "psr-4": { "Ryzhov\\Bundle\\FixturesBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.1-dev"
+        }
+    }
+}
