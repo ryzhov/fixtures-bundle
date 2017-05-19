@@ -3,7 +3,7 @@
 namespace Ryzhov\Bundle\FixturesBundle\Service;
 
 use Symfony\Component\Yaml\Yaml;
-use Ryzhov\Bundle\FixturesBundle\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\Kernel;
 
 class FixturesSource
 {
@@ -28,6 +28,21 @@ class FixturesSource
     }
 
     /**
+     * @param string $class
+     * @return string|boolean   False if bundle not found, bundle name otherwise
+     */
+    protected function getBundleNameForClass($class)
+    {
+        foreach ($this->kernel->getBundles() as $bundle) {
+            if (0 === strpos($class, $bundle->getNamespace())) {
+                return $bundle->getName();
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @param string $class     Full class name
      * @param string $format    Fixtures file format i.e. extension
      * @return array            Array of fixtures
@@ -36,7 +51,7 @@ class FixturesSource
     public function getFixtureForModel($class, $format ='csv')
     {
         $resource = $this->kernel->locateResource(sprintf('@%s/Resources/fixtures/%s',
-            $this->kernel->getBundleNameForClass($class),
+            $this->getBundleNameForClass($class),
             $this->transformEntityClassToFixturesFile($class, $format)
         ));
         
