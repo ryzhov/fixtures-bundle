@@ -8,12 +8,17 @@ class CsvTransformer
 {
     /**
      * @param string $path
-     * @param string $nullValue
+     * @param array $options
      * @return array
      */
-    public function process($path, $nullValue = 'NULL')
+    public function process($path, array $options = [])
     {
-        $csvFile = new CsvFile($path, CsvFile::DEFAULT_DELIMITER, CsvFile::DEFAULT_ENCLOSURE, '\\');
+        $delimiter = isset($options['delimiter']) ? $options['delimiter'] : CsvFile::DEFAULT_DELIMITER;
+        $enclosure = isset($options['enclosure']) ? $options['enclosure'] : CsvFile::DEFAULT_ENCLOSURE;
+        $escape = isset($options['escape']) ? $options['escape'] : '\\';
+        $nullValue = isset($options['null_value']) ? $options['null_value'] : 'NULL';
+
+        $csvFile = new CsvFile($path, $delimiter, $enclosure, $escape);
         
         $head = null;
         $i = 0;
